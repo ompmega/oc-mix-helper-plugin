@@ -58,7 +58,8 @@ class Plugin extends PluginBase
         // Skips caching when debug mode enabled
         if (Config::get('app.debug')) {
             $manifest = $this->getManifest($theme);
-        } else {
+        }
+        else {
             $manifest = Cache::get($manifestCacheKey, function () use ($theme, $manifestCacheKey) {
 
                 $manifest = $this->getManifest($theme);
