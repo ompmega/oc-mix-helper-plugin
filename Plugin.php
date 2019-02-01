@@ -3,13 +3,13 @@
 namespace Ompmega\MixHelper;
 
 use System\Classes\PluginBase;
+use October\Rain\Exception\SystemException;
 use Cms\Classes\Theme;
 use Cms\Classes\Asset;
-use Cms;
-use Cache;
 use Carbon\Carbon;
 use Config;
-use October\Rain\Exception\SystemException;
+use Cache;
+use Cms;
 
 /**
  * Class Plugin
@@ -18,10 +18,6 @@ use October\Rain\Exception\SystemException;
  */
 class Plugin extends PluginBase
 {
-    private $theme;
-
-    private $manifest;
-
     /**
      * {@inheritdoc}
      */
@@ -50,22 +46,22 @@ class Plugin extends PluginBase
     /**
      * Locate contents of generated manifest file.
      *
-     * @param string $assetFilePath
+     * @param string $path
      * @return string
      * @throws SystemException
      */
     public function readMixManifest(string $path): string
     {
-        $theme = $this->theme = Theme::getActiveTheme();
+        $theme = Theme::getActiveTheme();
         $manifestCacheKey = sprintf('%s:%s', $theme->getDirName(), 'mix-manifest' );
 
         // Skips caching when debug mode enabled
         if (Config::get('app.debug')) {
-            $manifest = $this->getManifest();
+            $manifest = $this->getManifest($theme);
         } else {
             $manifest = Cache::get($manifestCacheKey, function () use ($theme, $manifestCacheKey) {
 
-                $manifest = $this->getManifest();
+                $manifest = $this->getManifest($theme);
 
                 Cache::add(
                     $manifestCacheKey,
@@ -89,12 +85,13 @@ class Plugin extends PluginBase
     /**
      * Loads the manifest contents and parses to JSON.
      *
+     * @param Cms\Classes\Theme $theme
      * @return array
      * @throws SystemException
      */
-    protected function getManifest(): array
+    protected function getManifest($theme): array
     {
-        $asset = Asset::load($this->theme, 'mix-manifest.json');
+        $asset = Asset::load($theme, 'mix-manifest.json');
 
         if (!$asset || is_null($asset)) {
             throw new SystemException("The Mix manifest does not exist.");
