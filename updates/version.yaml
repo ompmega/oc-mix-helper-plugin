@@ -1,2 +1,2 @@
-1.0.1:
-    - Initialize plugin.
+1.0.2: Remove CMS::url conflict with Translate plugin
+1.0.1: Initialize plugin.

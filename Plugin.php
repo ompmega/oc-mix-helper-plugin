@@ -78,9 +78,7 @@ class Plugin extends PluginBase
             throw new SystemException("Unable to locate Mix file: {$path}.");
         }
 
-        return Cms::url(
-            sprintf('/themes/%s/assets', $theme->getDirName()) . $manifest[$path]
-        );
+        return sprintf('/themes/%s/assets', $theme->getDirName()) . $manifest[$path];
     }
 
     /**
