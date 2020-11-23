@@ -6,6 +6,7 @@ Helper plugin for OctoberCMS themes using Laravel Mix. Adds custom `mix()` twig 
 - Install plugin or search for `Ompmega.MixHelper`
 - Enable plugin (if not automatically enabled already)
 - Run `yarn dev` for development or `yarn prod` for production
+- Set a custom base URL in `config/app.php`: `'mix_url' => env(MIX_ASSET_URL, null),` (optional)
 
 ## Theme structure
 Below is the directory structure that the plugin uses to locate the `mix-manifest.json` file and the provided `webpack.mix.js` example uses two new directories inside of assets.

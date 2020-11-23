@@ -78,6 +78,12 @@ class Plugin extends PluginBase
             throw new SystemException("Unable to locate Mix file: {$path}.");
         }
 
+        $customBaseUrl = Config::get('app.mix_url');
+
+        if ($customBaseUrl) {
+            return $customBaseUrl . $manifest[$path];
+        }
+
         return sprintf('/themes/%s/assets', $theme->getDirName()) . $manifest[$path];
     }
 
