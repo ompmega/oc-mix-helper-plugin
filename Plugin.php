@@ -53,15 +53,13 @@ class Plugin extends PluginBase
     public function readMixManifest(string $path): string
     {
         $theme = Theme::getActiveTheme();
-        $manifestCacheKey = sprintf('%s:%s', $theme->getDirName(), 'mix-manifest' );
+        $manifestCacheKey = sprintf('%s:%s', $theme->getDirName(), 'mix-manifest');
 
         // Skips caching when debug mode enabled
         if (Config::get('app.debug')) {
             $manifest = $this->getManifest($theme);
-        }
-        else {
+        } else {
             $manifest = Cache::get($manifestCacheKey, function () use ($theme, $manifestCacheKey) {
-
                 $manifest = $this->getManifest($theme);
 
                 Cache::add(
