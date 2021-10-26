@@ -1,3 +1,4 @@
-1.0.3: Add support for custom base URLs.
-1.0.2: Remove CMS::url conflict with Translate plugin.
-1.0.1: Initialize plugin.
+v1.0.1: Initialize plugin.
+v1.0.2: Remove CMS::url conflict with Translate plugin.
+v1.0.3: Add support for custom base URLs.
+v1.0.4: Add support for using child themes.
