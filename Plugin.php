@@ -84,7 +84,11 @@ class Plugin extends PluginBase
             return $customBaseUrl . $manifest[$path];
         }
 
-        return sprintf('/themes/%s/assets', $theme->getDirName()) . $manifest[$path];
+        if ($theme->useParentAsset('assets' . $manifest[$path])) {
+            return sprintf('/themes/%s/assets', $theme->getParentTheme()->getDirName()) . $manifest[$path];
+        }
+
+        return  sprintf('/themes/%s/assets', $theme->getDirName()) . $manifest[$path];
     }
 
     /**
