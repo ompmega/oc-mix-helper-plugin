@@ -1,0 +1,8 @@
+{
+    "name": "ompmega/mixhelper-plugin",
+    "type": "october-plugin",
+    "description": "OctoberCMS plugin that supports Laravel Mix 'mix()' function in Twig templates.",
+    "require": {
+        "composer/installers": "~1.0"
+    }
+}
